@@ -1,0 +1,28 @@
+body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 20px;
+  }
+
+h1, h2 {
+color: rgb(0, 60, 255);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: rgb(0, 81, 255);
+    margin: 1vh;
+}
+
+input {
+    border: solid 2px rgb(26, 133, 233);
+    border-radius: 2px;
+}
+
+.submitBtn {
+    max-width: 75px;
+    background-color: aquamarine;
+}
