@@ -1,28 +1,96 @@
-body {
-    font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 20px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 
-h1, h2 {
-color: rgb(0, 60, 255);
+body {
+  font-family: Montserrat, sans-serif;
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    margin: 0;
+    height: 100%;
+    background-color: #f5f5f5;
+}
+
+h1,
+h2 {
+	color: #1172d0;
+	align-self: flex-start;
+	margin: 0 5vw;
+	padding: 5vh 0 0 0;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 label {
-    color: rgb(0, 81, 255);
-    margin: 1vh;
+	letter-spacing: normal;
+	align-self: flex-start;
+	font-size: 10px;
+	font-weight: 700;
+	position: relative;
+	top: 3.5vh;
+	left: 9vw;
+	color: #1172d0;
+	margin: 1vh;
 }
 
 input {
-    border: solid 2px rgb(26, 133, 233);
-    border-radius: 2px;
+	padding: 10px 0 0 9px;
+	background-color: #f5f5f5;
+	border: solid 2px #2678F3;
+	border-radius: 10px;
+	height: 4vh;
+	width: 60vw;
 }
 
-.submitBtn {
-    max-width: 75px;
-    background-color: aquamarine;
+.title {
+	color: #f5f5f5;
+	font-size: 32px;
+	padding: 0 12px;
+	letter-spacing: 2px;
+	text-align: end;
 }
+
+.submit-btn {
+  border-radius: 12px;
+  width: 157px;
+  color: #f5f5f5;
+  background-color: #e95a13;
+  padding: 12px;
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.form-container {
+	border: solid 2px rgb(26 133 233);
+	background-color: #fff;
+	margin: 1vh 9vw;
+	border-radius: 25px;
+}
+
+.headline {
+	/* background-image: url("public/nikucar.png" ); */
+  background-color: #004990;
+  display: block;
+  height: 19vh;
+  border-radius: 0 0 25px 25px;
+  flex-direction: column-reverse;
+  align-items: center;
+  row-gap: 5px;
+  z-index: -1;
+}
+
+.terminos {
+  top: 0;
+  font-size: 10px;
+}
+
+.check-term {
+  position: inherit;
+  top: 5px;
+  margin-left: 3px;
+  height: 2vh;
+  width: 4vw;
+}
+
