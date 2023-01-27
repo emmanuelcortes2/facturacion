@@ -1,8 +1,46 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import TextField from '@mui/material/TextField';
 import './index.css'
 
+
+const billingValidation = Yup.object({
+    idOperacion: Yup.number()
+        .required('Este campo no puede estar vacío'),
+
+    serie: Yup.number()
+        .required('Este campo no puede estar vacío')
+        .test(
+            'Is number?',
+            'ERROR: Este campo debe ser númerico',
+            (value) => value > 0
+        ),
+
+    fecha: Yup.date()
+        .required(),
+
+    rfc: Yup.string()
+        .required('Este campo no puede estar vacío'),
+
+    rfcEmisor: Yup.string()
+        .required(),
+
+    tipoCambio: Yup.number()
+        .typeError('Este campo debe ser un número')
+        .required('Este campo no puede estar vacío'),
+
+    razonSocial: Yup.string()
+        .required(),
+
+    domicilioFiscal: Yup.string()
+        .required(),
+
+    totalFactura: Yup.number()
+        .typeError('Este campo debe ser un número')
+        .required('Este campo no puede estar vacío')
+})
 
 
 const Basic = () => (
@@ -10,8 +48,7 @@ const Basic = () => (
         <h1>Facturación NikuCar</h1>
         <Formik
             initialValues={{
-                idOperacion: "",
-                serie: "",
+                idOperacion: "", tipoCambioserie: "",
                 fecha: "",
                 divisa: "",
                 tipoCambio: "",
@@ -24,115 +61,153 @@ const Basic = () => (
                 formaPago: "",
                 usoCfdi: "",
                 totalFactura: "",
-                claveProdServ: "",
-                claveUnidad: "",
-                concepto: "",
-                cantidad: "",
-                importeUnitario: "",
-                descuento: "",
-                retenidos: "",
-                impuesto: "",
-                porcentaje: "",
-                importe: "",
+                conceptos: {
+                    claveProdServ: "",
+                    claveUnidad: "",
+                    concepto: "",
+                    cantidad: "",
+                    importeUnitario: "",
+                    descuento: "",
+                    impuesto: {
+                        retenidos: [],
+                        traslados: {
+                            impuesto: "",
+                            porcentaje: "",
+                            importe: ""
+                        },
+                    },
+                },
             }}
 
             onSubmit={async (values) => {
                 await new Promise((r) => setTimeout(r, 500));
-                alert(JSON.stringify(values, null, 2));
+                console.log('Output: ', JSON.stringify(values, null, 2));
             }}
+
+            validationSchema={ billingValidation }
         >
-            <Form>
-                <label htmlFor="idOperacion">Id de Operación</label>
-                <Field id="idOperacion" name="idOperacion" />
 
-                <label htmlFor="serie">Serie</label>
-                <Field id="serie" name="serie" />
+            {({ errors, touched }) => (
+                <Form>
+                    <TextField
+                        fullWidth
+                        id="idOperacion"
+                        name="idOperacion"
+                        label="ID de Operación"
+                    />
+                    {errors.idOperacion && touched.idOperacion ? (
+                        <div>{errors.idOperacion}</div>
+                    ) : null}
 
-                <label htmlFor="divisa">Divisa</label>
-                <Field id="divisa" name="divisa" />
 
-                <label htmlFor="tipoCambio">Tipo de cambio</label>
-                <Field id="tipoCambio" name="tipoCambio" />
+                    <label htmlFor="serie">Serie</label>
+                    <Field id="serie" name="serie" />
+                    {errors.serie && touched.serie ? (
+                        <div>{errors.serie}</div>
+                    ) : null}
 
-                <label htmlFor="rfcEmisor">RFC del Emisor</label>
-                <Field id="rfcEmisor" name="rfcEmisor" />
+                    <label htmlFor="divisa">Divisa</label>
+                    <Field as="select" id="divisa" name="divisa" >
+                        <option value="MXN">MXN</option>
+                        <option value="USD">USD</option>
+                    </Field>
 
-                <label htmlFor="rfc">RFC</label>
-                <Field id="rfc" name="rfc" />
+                    <label htmlFor="tipoCambio">Tipo de cambio</label>
+                    <Field id="tipoCambio" name="tipoCambio" />
+                    {errors.tipoCambio && touched.tipoCambio ? (
+                        <div>{errors.tipoCambio}</div>
+                    ) : null}
 
-                <label htmlFor="razonSocial">Razón Social</label>
-                <Field id="razonSocial" name="razonSocial" />
+                    <label htmlFor="rfcEmisor">RFC del Emisor</label>
+                    <Field id="rfcEmisor" name="rfcEmisor" />
+                    {errors.rfcEmisor && touched.rfcEmisor ? (
+                        <div>{errors.rfcEmisor}</div>
+                    ) : null}
 
-                <label htmlFor="domicilioFiscal">Domicilio Fiscal</label>
-                <Field id="domicilioFiscal" name="domicilioFiscal" />
+                    <label htmlFor="rfc">RFC</label>
+                    <Field id="rfc" name="rfc" />
+                    {errors.rfc && touched.rfc ? (
+                        <div>{errors.rfc}</div>
+                    ) : null}
 
-                <label htmlFor="regimenFiscal">Régimen Fiscal</label>
-                <Field id="regimenFiscal" name="regimenFiscal" />
+                    <label htmlFor="razonSocial">Razón Social</label>
+                    <Field id="razonSocial" name="razonSocial" />
+                    {errors.razonSocial && touched.razonSocial ? (
+                        <div>{errors.razonSocial}</div>
+                    ) : null}
 
-                <label htmlFor="metodoPago">Método de pago</label>
-                <Field id="metodoPago" name="metodoPago" />
+                    <label htmlFor="domicilioFiscal">Domicilio Fiscal</label>
+                    <Field id="domicilioFiscal" name="domicilioFiscal" />
+                    {errors.domicilioFiscal && touched.domicilioFiscal ? (
+                        <div>{errors.domicilioFiscal}</div>
+                    ) : null}
 
-                <label htmlFor="formaPago">Forma de pago</label>
-                <Field id="formaPago" name="formaPago" />
+                    <label htmlFor="regimenFiscal">Régimen Fiscal</label>
+                    <Field id="regimenFiscal" name="regimenFiscal" />
 
-                <label htmlFor="usoCfdi">Uso del CFDI</label>
-                <Field id="usoCfdi" name="usoCfdi" />
+                    <label htmlFor="metodoPago">Método de pago</label>
+                    <Field id="metodoPago" name="metodoPago" />
 
-                <label htmlFor="totalFactura">Total</label>
-                <Field id="totalFactura" name="totalFactura" />
+                    <label htmlFor="formaPago">Forma de pago</label>
+                    <Field id="formaPago" name="formaPago" />
+                    <ErrorMessage name='formaPago' />
 
-                <h2>Conceptos</h2>
+                    <label htmlFor="usoCfdi">Uso del CFDI</label>
+                    <Field id="usoCfdi" name="usoCfdi" />
 
-                <label htmlFor="claveProdServ">Clave de Producto o Servicio</label>
-                <Field id="claveProdServ" name="claveProdServ" />
+                    <label htmlFor="totalFactura">Total</label>
+                    <Field id="totalFactura" name="totalFactura" />
+                    <ErrorMessage name='totalFactura' />
+                    {errors.totalFactura && touched.totalFactura ? (
+                        <div>{errors.totalFactura}</div>
+                    ) : null}
 
-                <label htmlFor="claveUnidad">Clave de Unidad</label>
-                <Field id="claveUnidad" name="claveUnidad" />
+                    <h2>Conceptos</h2>
 
-                <label htmlFor="concepto">Concepto</label>
-                <Field id="concepto" name="concepto" />
+                    <label htmlFor="claveProdServ">Clave de Producto o Servicio</label>
+                    <Field id="claveProdServ" name="conceptos.claveProdServ" />
 
-                <label htmlFor="cantidad">Cantidad</label>
-                <Field id="cantidad" name="cantidad" />
+                    <label htmlFor="claveUnidad">Clave de Unidad</label>
+                    <Field id="claveUnidad" name="conceptos.claveUnidad" />
 
-                <label htmlFor="impoteUnitario">Importe Unitario</label>
-                <Field id="impoteUnitario" name="impoteUnitario" />
+                    <label htmlFor="concepto">Concepto</label>
+                    <Field id="concepto" name="conceptos.concepto" />
 
-                <label htmlFor="descuento">Descuento</label>
-                <Field id="descuento" name="descuento" />
+                    <label htmlFor="cantidad">Cantidad</label>
+                    <Field id="cantidad" name="conceptos.cantidad" />
 
-                <h2>Impuestos</h2>
+                    <label htmlFor="importeUnitario">Importe Unitario</label>
+                    <Field id="importeUnitario" name="conceptos.importeUnitario" />
+                    {/* <ErrorMessage name='conceptos.importeUnitario' /> */}
 
-                <label htmlFor="retenidos">Retenidos</label>
-                <Field id="retenidos" name="retenidos" />
+                    <label htmlFor="descuento">Descuento</label>
+                    <Field id="descuento" name="conceptos.descuento" />
+
+                    <h2>Impuestos</h2>
+
+                    {/* <label htmlFor="retenidos">Retenidos</label>
+                <Field id="retenidos" name="conceptos[impuesto][retenidos]" />
 
                 <h2>Traslados</h2>
 
                 <label htmlFor="impuesto">Impuesto</label>
-                <Field id="impuesto" name="impuesto" />
+                <Field id="impuesto" name="conceptos[impuesto][traslados][impuesto]" />
 
                 <label htmlFor="porcentaje">Porcentaje</label>
-                <Field id="porcentaje" name="porcentaje" />
+                <Field id="porcentaje" name="conceptos[impuesto][traslados][porcentaje]" />
 
                 <label htmlFor="importe">Importe</label>
-                <Field id="importe" name="importe" />
+                <Field id="importe" name="conceptos[impuesto][traslados][importe]" /> */}
 
-                <label>
-                    <Field type="checkbox" name="terms" value="terms" />
-                    Acepto términos y condiciones
-                </label>
-
-                {/* {/<label htmlFor="email">Email</label>
-        <Field
-          id="email"
-          name="email"
-          placeholder="jane@acme.com"
-          type="email"
-        /> } */}
-                <button className='submitBtn' type="submit">Submit</button>
-            </Form>
+                    <label>
+                        <Field type="checkbox" name="terms" value="terms" />
+                        Acepto términos y condiciones
+                    </label>
+                    <button className='submitBtn' type="submit">Submit</button>
+                </Form>
+            )}
         </Formik>
-    </div>
+    </div >
 );
 
 // ========================================
