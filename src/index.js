@@ -1,9 +1,10 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField';
 import ReactDOM from 'react-dom/client'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import './index.css'
 
 
@@ -45,8 +46,8 @@ const billingValidation = Yup.object({
 
 
 const Basic = () => (
-    <div className='formContainer'>
-        <h1>Facturación NikuCar</h1>
+    <div className='form-container'>
+        <h1>Facturación</h1>
         <Formik
             initialValues={{
                 idOperacion: "", tipoCambioserie: "",
@@ -85,79 +86,115 @@ const Basic = () => (
                 console.log('Output: ', JSON.stringify(values, null, 2));
             }}
 
-            validationSchema={ billingValidation }
+            validationSchema={billingValidation}
         >
 
             {({ errors, touched }) => (
                 <Form>
                     <TextField
-                        fullWidth
                         id="idOperacion"
                         name="idOperacion"
                         label="ID de Operación"
                     />
                     {errors.idOperacion && touched.idOperacion ? (
-                        <div>{errors.idOperacion}</div>
+                        <div style={{ color: '#F40000' }}>{errors.idOperacion}</div>
                     ) : null}
 
 
-                    <label htmlFor="serie">Serie</label>
-                    <Field id="serie" name="serie" />
+                    <TextField
+                        id="serie"
+                        name="serie"
+                        label="Serie"
+                    />
                     {errors.serie && touched.serie ? (
                         <div>{errors.serie}</div>
                     ) : null}
 
-                    <label htmlFor="divisa">Divisa</label>
-                    <Field as="select" id="divisa" name="divisa" >
+                    <TextField
+                        as="select"
+                        id="divisa"
+                        name="divisa"
+                        label="Divisa"
+                    >
                         <option value="MXN">MXN</option>
                         <option value="USD">USD</option>
-                    </Field>
+                    </TextField>
 
-                    <label htmlFor="tipoCambio">Tipo de cambio</label>
-                    <Field id="tipoCambio" name="tipoCambio" />
+                    <TextField
+                        id="tipoCambio"
+                        name="tipoCambio"
+                        label="Tipo de cambio"
+                    />
                     {errors.tipoCambio && touched.tipoCambio ? (
                         <div>{errors.tipoCambio}</div>
                     ) : null}
 
-                    <label htmlFor="rfcEmisor">RFC del Emisor</label>
-                    <Field id="rfcEmisor" name="rfcEmisor" />
+                    <TextField
+                        id="rfcEmisor"
+                        name="rfcEmisor"
+                        label="RFC del Emisor"
+                    />
                     {errors.rfcEmisor && touched.rfcEmisor ? (
                         <div>{errors.rfcEmisor}</div>
                     ) : null}
 
-                    <label htmlFor="rfc">RFC</label>
-                    <Field id="rfc" name="rfc" />
+                    <TextField
+                        id="rfc"
+                        name="rfc"
+                        label="RFC"
+                    />
                     {errors.rfc && touched.rfc ? (
                         <div>{errors.rfc}</div>
                     ) : null}
 
-                    <label htmlFor="razonSocial">Razón Social</label>
-                    <Field id="razonSocial" name="razonSocial" />
+                    <TextField
+                        id="razonSocial"
+                        name="razonSocial"
+                        label="Razón Social"
+                    />
                     {errors.razonSocial && touched.razonSocial ? (
                         <div>{errors.razonSocial}</div>
                     ) : null}
 
-                    <label htmlFor="domicilioFiscal">Domicilio Fiscal</label>
-                    <Field id="domicilioFiscal" name="domicilioFiscal" />
+                    <TextField
+                        id="domicilioFiscal"
+                        name="domicilioFiscal"
+                        label="Domicilio Fiscal"
+                    />
                     {errors.domicilioFiscal && touched.domicilioFiscal ? (
                         <div>{errors.domicilioFiscal}</div>
                     ) : null}
 
-                    <label htmlFor="regimenFiscal">Régimen Fiscal</label>
-                    <Field id="regimenFiscal" name="regimenFiscal" />
+                    <TextField
+                        id="regimenFiscal"
+                        name="regimenFiscal"
+                        label="Régimen fiscal"
+                    />
 
-                    <label htmlFor="metodoPago">Método de pago</label>
-                    <Field id="metodoPago" name="metodoPago" />
+                    <TextField
+                        id="metodoPago"
+                        name="metodoPago"
+                        label="Método de pago"
+                    />
 
-                    <label htmlFor="formaPago">Forma de pago</label>
-                    <Field id="formaPago" name="formaPago" />
+                    <TextField
+                        id="formaPago"
+                        name="formaPago"
+                        label="Forrma de pago"
+                    />
                     <ErrorMessage name='formaPago' />
 
-                    <label htmlFor="usoCfdi">Uso del CFDI</label>
-                    <Field id="usoCfdi" name="usoCfdi" />
+                    <TextField
+                        id="usoCfdi"
+                        name="usoCfdi"
+                        label="Uso del CFDI"
+                    />
 
-                    <label htmlFor="totalFactura">Total</label>
-                    <Field id="totalFactura" name="totalFactura" />
+                    <TextField
+                        id="totalFactura"
+                        name="totalFactura"
+                        label=" Total de la factura"
+                    />
                     <ErrorMessage name='totalFactura' />
                     {errors.totalFactura && touched.totalFactura ? (
                         <div>{errors.totalFactura}</div>
@@ -165,24 +202,42 @@ const Basic = () => (
 
                     <h2>Conceptos</h2>
 
-                    <label htmlFor="claveProdServ">Clave de Producto o Servicio</label>
-                    <Field id="claveProdServ" name="conceptos.claveProdServ" />
+                    <TextField
+                        id="claveProdServ"
+                        name="conceptos.claveProdServ"
+                        label="Clave de producto o servicio"
+                    />
 
-                    <label htmlFor="claveUnidad">Clave de Unidad</label>
-                    <Field id="claveUnidad" name="conceptos.claveUnidad" />
+                    <TextField
+                        id="claveUnidad"
+                        name="conceptos.claveUnidad"
+                        label="Clave de Unidad"
+                    />
 
-                    <label htmlFor="concepto">Concepto</label>
-                    <Field id="concepto" name="conceptos.concepto" />
+                    <TextField
+                        id="concepto"
+                        name="conceptos.concepto"
+                        label="Concepto"
+                    />
 
-                    <label htmlFor="cantidad">Cantidad</label>
-                    <Field id="cantidad" name="conceptos.cantidad" />
+                    <TextField
+                        id="cantidad"
+                        name="conceptos.cantidad"
+                        label="Cantidad"
+                    />
 
-                    <label htmlFor="importeUnitario">Importe Unitario</label>
-                    <Field id="importeUnitario" name="conceptos.importeUnitario" />
+                    <TextField
+                        id="importeUnitario"
+                        name="conceptos.importeUnitario"
+                        label="Importe Unitario"
+                    />
                     {/* <ErrorMessage name='conceptos.importeUnitario' /> */}
 
-                    <label htmlFor="descuento">Descuento</label>
-                    <Field id="descuento" name="conceptos.descuento" />
+                    <TextField
+                        id="descuento"
+                        name="conceptos.descuento"
+                        label="Descuento"
+                    />
 
                     <h2>Impuestos</h2>
 
@@ -204,7 +259,13 @@ const Basic = () => (
                         <Field type="checkbox" name="terms" value="terms" />
                         Acepto términos y condiciones
                     </label>
-                    <button className='submitBtn' type="submit">Submit</button>
+                    <Button
+                        className='submitBtn'
+                        type="submit"
+                        variant="contained"
+                    >
+                        Generar Factura
+                    </Button>
                 </Form>
             )}
         </Formik>
