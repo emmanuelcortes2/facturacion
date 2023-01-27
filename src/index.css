@@ -1,26 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
 
 body {
   font-family: Montserrat, sans-serif;
-	letter-spacing: 1.5px;
-	font-size: 12px;
-	margin: 0;
-	height: 100%;
-	background-color: #f5f5f5;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+  margin: 0;
+  height: 100%;
+  background-color: #f5f5f5;
 }
 
 h1 {
-	color: #fff;
-	text-align: right;
-	margin-right: 2vw;
-	font-size: 32px;
+  color: #fff;
+  text-align: right;
+  margin-right: 2vw;
+  font-size: 32px;
 }
 
 h2 {
-	color: #1172d0;
-	align-self: flex-start;
-	margin: 0 5vw;
-	padding: 5vh 0 0 0;
+  color: #1172d0;
+  align-self: flex-start;
+  margin: 0 5vw;
+  padding: 5vh 0 0;
 }
 
 form {
@@ -28,25 +28,25 @@ form {
   flex-direction: column;
   align-items: center;
   background-color: #fff;
-  border: 2px solid #1172D0;
+  border: 2px solid #1172d0;
   border-radius: 25px;
   width: 80vw;
   margin: 0 auto;
-	padding-top: 10%;
-	padding-bottom: 10%;
-	gap: 2vh;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  gap: 2vh;
 }
 
 .title {
-	color: #f5f5f5;
-	font-size: 32px;
-	padding: 0 12px;
-	letter-spacing: 2px;
-	text-align: end;
+  color: #f5f5f5;
+  font-size: 32px;
+  padding: 0 12px;
+  letter-spacing: 2px;
+  text-align: end;
 }
 
-input{
-	margin-bottom: 3vh;
+input {
+  margin-bottom: 3vh;
 }
 
 .submit-btn {
@@ -59,20 +59,19 @@ input{
   margin-bottom: 10px;
 }
 
-.form-container {	
-	display: flex;
-	flex-direction: column;
-	background-color: #004990;
-	height: 17vh;
-	padding-top: 10vh;
-	border-bottom-left-radius: 25px;
-	border-bottom-right-radius: 25px;
-	background-image: url(/public/nikucar.png);
-	background-repeat: no-repeat;
-	background-position-x: 95%;
-	background-position-y: 10%;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #004990;
+  height: 17vh;
+  padding-top: 10vh;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  background-image: url("/public/nikucar.png");
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: 10%;
 }
-
 
 .terminos {
   top: 0;
@@ -86,4 +85,3 @@ input{
   height: 2vh;
   width: 4vw;
 }
-
